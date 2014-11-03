@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Khooni Masks!</title>
+	<script src="js/jquery.js"></script>
+	
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script>
+	var mask;
+	
+	function swapMask(mask, original){
+		if(mask == ""){
+			var src = "";
+		}
+		else {
+			var src = 'img/' + mask + '.png';
+		}
+		original.src = src;
+	}
+	
+	function screamer(){
+		$('#scare').show();
+		$('#sound')[0].play();
+		setTimeout(function(){
+			$('#scare').hide();
+		}, 1500);
+	}
+	
+	function print(){
+		var canvas = $('.mask')[0];
+	    var img = new Image;
+
+	    img.src = canvas.toDataURL(); 
+		
+	    $('.wrapper').append(img);
+		
+	}
+	
+	function deletePhotos(){
+		var imgs = $('.wrapper img');
+		console.log(imgs);
+		for(var i=0; i < imgs.length; i++){
+			$(imgs[i]).remove();
+		}
+	}
+	
+	</script>
+	<style>
+		#scare{
+			display:none;
+			width:100%;
+			height:100%;
+			position:fixed;
+			top: 0;
+			left: 0;
+		}
+		
+		.mask {
+			width: 800px;
+		}
+		
+	</style>
+</head>
+<body class="experiment">
+	<audio id="sound" src="assets/screamer.wav"></audio>
+    <div class="wrapper">
+<canvas width="400" height="320" class="mask"></canvas><br />
+<button onclick="swapMask('frank', mask);">Frankenstein's Monster</button>
+<button onclick="swapMask('vamp', mask);">Vampire</button>
+<button onclick="swapMask('phantom', mask);">Phantom</button>
+<button onclick="swapMask('devil', mask);">Devil</button>
+<button onclick="swapMask('zombie', mask);">Zombie</button>
+<button onclick="swapMask('mohnesh', mask);">Kalyan</button>
+<button onclick="screamer();">Surprise</button>
+<button onclick="swapMask('', mask);">Reset</button>
+<button onclick="print();">Save Photo</button>
+<button onclick="deletePhotos();">Clear Photos</button><br />
+
+
+
+<!-- Include the CCV image processing and face detection libraries -->
+<script src="js/ccv.js"></script>
+<script src="js/face.js"></script>
+
+    </div>
+	<img src="assets/khooni.jpg" id="scare" alt="" />	
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="js/experiment.js"></script>
+</body>
+</html>
